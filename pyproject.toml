@@ -3,11 +3,11 @@ requires = ["hatchling >= 1.26"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/a1-notation-converter"]
+packages = ["src/a1_notation_converter"]
 
 [project]
 name = "a1-notation-converter"
-version = "1.0.4"
+version = "1.0.8"
 authors = [
   { name="Sunshinetsu0411", email="yewhang2004@gmail.com" },
 ]

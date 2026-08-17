@@ -10,18 +10,23 @@ The package and release history can be found at [pypi.org](https://pypi.org/proj
 ***
 
 ## Example
+Importing the library:
+```python
+from a1_notation_converter import a1_converter
+```
+
 Converting integer to A1 notation:
 ```python
-int_to_a1(1)       # return "A"
-int_to_a1(27)      # return "AA"
-int_to_a1(731)     # return "ABC"
+a1_converter.int_to_a1(1)       # return "A"
+a1_converter.int_to_a1(27)      # return "AA"
+a1_converter.int_to_a1(731)     # return "ABC"
 ```
 
 Converting A1 notation to integer:
 ```python
-a1_to_int("A")      # return 1
-a1_to_int("AA")     # return 27
-a1_to_int("CBA")    # return 2081
+a1_converter.a1_to_int("A")      # return 1
+a1_converter.a1_to_int("AA")     # return 27
+a1_converter.a1_to_int("CBA")    # return 2081
 ```
 ***
 

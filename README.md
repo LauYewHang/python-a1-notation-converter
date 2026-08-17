@@ -3,6 +3,15 @@ The A1 notation converter library allows the user to convert integer to its A1 n
 E.g. 'G' represents 7th column, 'AZ' represents 52th column.
 ***
 
+## Version 1.0.9
+- Fixed logic error in function 'int_to_a1()' where number value from 52 does not modulo and divide properly to output the correct A1 notation. E.g.
+```python
+int_to_a1(52) # return "B@" (should be "AZ")
+int_to_a1(78) # return "C@" (should be "BZ")
+```
+- Added unit testing to validate function behaviour.
+***
+
 ## Installation
 Installation of this library can be done with Python `pip`:  
 `pip install a1-notation-converter`  

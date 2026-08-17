@@ -7,7 +7,7 @@ packages = ["src/a1_notation_converter"]
 
 [project]
 name = "a1-notation-converter"
-version = "1.0.8"
+version = "1.0.9"
 authors = [
   { name="Sunshinetsu0411", email="yewhang2004@gmail.com" },
 ]

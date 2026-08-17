@@ -5,7 +5,8 @@ E.g. 'G' represents 7th column, 'AZ' represents 52th column.
 
 ## Installation
 Installation of this library can be done with Python `pip`:  
-`pip install a1-notation-converter`
+`pip install a1-notation-converter`  
+The package and release history can be found at [pypi.org](https://pypi.org/project/a1-notation-converter/).
 ***
 
 ## Example

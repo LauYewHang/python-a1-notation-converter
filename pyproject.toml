@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/a1-notation-converter"]
+
+[project]
+name = "a1-notation-converter"
+version = "1.0.4"
+authors = [
+  { name="Sunshinetsu0411", email="yewhang2004@gmail.com" },
+]
+description = "Python package for converting integer to A1 notation and vice versa."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/LauYewHang/python-a1-notation-converter"
+Issues = "https://github.com/LauYewHang/python-a1-notation-converter/issues"

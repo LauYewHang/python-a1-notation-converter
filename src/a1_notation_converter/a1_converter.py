@@ -17,7 +17,7 @@ def int_to_a1(number : int, strating_index : int = 1) -> str:
         if (number <= ALPHABET_AMOUNT):
             return chr(ASCII_A_INDEX + number - strating_index)
         else:
-            remainder = number % ALPHABET_AMOUNT
+            remainder = ALPHABET_AMOUNT if number % ALPHABET_AMOUNT == 0 else number % ALPHABET_AMOUNT
             return int_to_a1((number - remainder) // ALPHABET_AMOUNT) + chr(ASCII_A_INDEX + remainder - strating_index)
 
 def a1_to_int(a1_notation : str) -> int:

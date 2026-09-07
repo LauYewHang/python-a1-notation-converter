@@ -1,24 +1,27 @@
 ASCII_A_INDEX = 65
 ASCII_Z_INDEX = 90
 ALPHABET_AMOUNT = 26
+DEFAULT_STARTING_INDEX = 1
 
-def int_to_a1(number : int, strating_index : int = 1) -> str:
+def int_to_a1(number : int, starting_index : int = DEFAULT_STARTING_INDEX) -> str:
     if (not type(number) is int):
         raise TypeError(
             f"The type of argument 'number' of function 'int_to_a1()' needs to be type 'int'.\n"
             f"Current received type of 'number': {type(number)}."
         )
-    elif (number <= 0):
+    elif (number < starting_index):
         raise ValueError(
-            "The given value of argument 'number' of function 'int_to_a1()' cannot be <= 0.\n"
-            f"Current received value of 'number': {number}."
+            "The given value of argument 'number' of function 'int_to_a1()' cannot be less than argument 'starting_index'.\n"
+            f"Current received value of 'number': {number}.\n"
+            f"Current received value of 'starting_index': {starting_index}"
         )
     else:
+        number += (DEFAULT_STARTING_INDEX - starting_index)
         if (number <= ALPHABET_AMOUNT):
-            return chr(ASCII_A_INDEX + number - strating_index)
+            return chr(ASCII_A_INDEX + number - 1)
         else:
             remainder = ALPHABET_AMOUNT if number % ALPHABET_AMOUNT == 0 else number % ALPHABET_AMOUNT
-            return int_to_a1((number - remainder) // ALPHABET_AMOUNT) + chr(ASCII_A_INDEX + remainder - strating_index)
+            return int_to_a1((number - remainder) // ALPHABET_AMOUNT) + int_to_a1(remainder)
 
 def a1_to_int(a1_notation : str) -> int:
     if (not type(a1_notation) is str):

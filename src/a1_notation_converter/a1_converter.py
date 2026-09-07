@@ -47,3 +47,13 @@ def a1_to_int(a1_notation : str) -> int:
                 number += (ord(a1_notation[character_index]) - ASCII_A_INDEX + 1) * ALPHABET_AMOUNT**(a1_notation_len - character_index - 1)
 
         return number
+
+def column_row_to_a1(column : int, row : int, inverse : bool = False) -> str:
+    if (not type(column) is int or not type(row) is int):
+        raise TypeError(
+            f"The type of argument 'column' and 'row' of function column_row_to_a1() needs to be type 'int'.\n"
+            f"Current received type of 'column': {type(column)}.\n"
+            f"Current received type of 'row': {type(row)}."
+        )
+    else:
+        return f"{int_to_a1(column)}{row}" if not inverse else f"{int_to_a1(row)}{column}"

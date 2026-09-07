@@ -3,13 +3,14 @@ The A1 notation converter library allows the user to convert integer to its A1 n
 E.g. 'G' represents 7th column, 'AZ' represents 52th column.
 ***
 
-## Version 1.0.9
-- Fixed logic error in function 'int_to_a1()' where number value from 52 does not modulo and divide properly to output the correct A1 notation. E.g.
-```python
-int_to_a1(52) # return "B@" (should be "AZ")
-int_to_a1(78) # return "C@" (should be "BZ")
+## Version 1.1.0
+- Fixed logic error when converting int to a1 notation using int_to_a1() with starting_index = 0 results in wrong answer being returned. I.e.  
 ```
-- Added unit testing to validate function behaviour.
+int_to_a1(26, 0) # return "[" (should be "AA")
+int_to_a1(52, 0) # return "A[" (should be "BA")
+```
+- Added function column_row_to_a1() to convert provided column and row into a1 notation.
+- Added function a1_to_column_row() to convert provided a1 notation into dictionary that contains column and row keys.
 ***
 
 ## Installation
@@ -40,23 +41,4 @@ a1_converter.a1_to_int("CBA")    # return 2081
 ***
 
 ## Documentation
-**int_to_a1( )**  
-Syntax:
-`int_to_a1(number : int, starting_index : int = 1) -> str`
-
-Arguments:
-- number: The integer that is going to be converted to A1 notation.
-- starting_index: Specify whether the A1 notation 'A' represents the 0th column or 1st column. Default to ```starting_index = 1```.
-
-Return:  
-A string represents the A1 notation of the given integer.  
-
-**a1_to_int( )**  
-Syntax:
-`a1_to_int(a1_notation : str) -> int`
-
-Arguments:
-- a1_notation: The string that is going to be converted to integer representation.
-
-Return:  
-An integer represents the number value of the given string.
+Documentation can be found at this [GitHub repository](https://github.com/LauYewHang/python-a1-notation-converter/tree/master/docs).

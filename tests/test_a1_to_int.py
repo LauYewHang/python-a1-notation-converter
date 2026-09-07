@@ -17,16 +17,16 @@ class TestA1ToInt(unittest.TestCase):
 
     def test_tripple_alphabet(self):
         print("")
-        print(f"a1_notation: AAA\t\ti: {a1_converter.a1_to_int('AAA')}")
+        print(f"a1_notation: AAA\ti: {a1_converter.a1_to_int('AAA')}")
         self.assertEqual(703, a1_converter.a1_to_int("AAA"))
-        print(f"a1_notation: ZZZ\t\ti: {a1_converter.a1_to_int('ZZZ')}")
+        print(f"a1_notation: ZZZ\ti: {a1_converter.a1_to_int('ZZZ')}")
         self.assertEqual(18278, a1_converter.a1_to_int("ZZZ"))
 
     def test_quadruple_digit(self):
         print("")
-        print(f"a1_notation: AAAA\t\ti: {a1_converter.a1_to_int('AAAA')}")
+        print(f"a1_notation: AAAA\ti: {a1_converter.a1_to_int('AAAA')}")
         self.assertEqual(18279, a1_converter.a1_to_int("AAAA"))
-        print(f"a1_notation: ZZZZ\t\ti: {a1_converter.a1_to_int('ZZZZ')}")
+        print(f"a1_notation: ZZZZ\ti: {a1_converter.a1_to_int('ZZZZ')}")
         self.assertEqual(475254, a1_converter.a1_to_int("ZZZZ"))
 
 if __name__ == "__main__":

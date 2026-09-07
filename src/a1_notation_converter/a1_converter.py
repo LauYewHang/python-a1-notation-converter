@@ -1,3 +1,6 @@
+from typing import TypedDict
+import re
+
 ASCII_A_INDEX = 65
 ASCII_Z_INDEX = 90
 ALPHABET_AMOUNT = 26
@@ -57,3 +60,20 @@ def column_row_to_a1(column : int, row : int, inverse : bool = False) -> str:
         )
     else:
         return f"{int_to_a1(column)}{row}" if not inverse else f"{int_to_a1(row)}{column}"
+
+ColumnRowDict = TypedDict("ColumnRowDict", {"column" : int, "row" : int})
+def a1_to_column_row(a1_notation : str) -> ColumnRowDict:
+    if (not type(a1_notation) is str):
+        raise TypeError(
+            f"The type of argument 'a1_notation' of function 'a1_to_column_row()' needs to be type 'str'.\n"
+            f"Current received type of 'a1_notation': {type(a1_notation)}."
+        )
+    elif (re.compile("[a-zA-Z]+[0-9]+$").match(a1_notation) == None):
+        raise ValueError(
+            f"The given value of argument 'a1_notation' of function a1_to_column_row() does not match the regular expression '[a-zA-Z]+[0-9]+$'."
+            f"Current received value of 'a1_notation': {a1_notation}."
+        )
+    else:
+        column_value = re.compile("[a-zA-Z]+").search(a1_notation).group(0)
+        row_value = re.compile("[0-9]+").search(a1_notation).group(0)
+        return {"column" : a1_to_int(column_value), "row" : row_value}

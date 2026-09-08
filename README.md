@@ -3,7 +3,8 @@ The A1 notation converter library allows the user to convert integer to its A1 n
 E.g. 'G' represents 7th column, 'AZ' represents 52th column.
 ***
 
-## Version 1.1.0
+## Latest releases
+### Version 1.1.0
 - Fixed logic error when converting int to a1 notation using int_to_a1() with starting_index = 0 results in wrong answer being returned. I.e.  
 ```
 int_to_a1(26, 0) # return "[" (should be "AA")
@@ -11,6 +12,8 @@ int_to_a1(52, 0) # return "A[" (should be "BA")
 ```
 - Added function column_row_to_a1() to convert provided column and row into a1 notation.
 - Added function a1_to_column_row() to convert provided a1 notation into dictionary that contains column and row keys.
+### Version 1.1.1
+- Added 'starting_index' argument for function a1_to_int() to allow specification of value of "A".
 ***
 
 ## Installation

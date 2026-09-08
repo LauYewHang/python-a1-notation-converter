@@ -14,6 +14,8 @@ int_to_a1(52, 0) # return "A[" (should be "BA")
 - Added function a1_to_column_row() to convert provided a1 notation into dictionary that contains column and row keys.
 ### Version 1.1.1
 - Added 'starting_index' argument for function a1_to_int() to allow specification of value of "A".
+### Version 1.1.2
+- Fixed an error where function a1_to_column_row()'s return value having the wrong data type. I.e. for the dictionary being returned, the value of key "row" is a string instead of integer.
 ***
 
 ## Installation

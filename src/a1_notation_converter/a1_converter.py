@@ -86,4 +86,4 @@ def a1_to_column_row(a1_notation : str) -> ColumnRowDict:
     else:
         column_value = re.compile("[a-zA-Z]+").search(a1_notation).group(0)
         row_value = re.compile("[0-9]+").search(a1_notation).group(0)
-        return {"column" : a1_to_int(column_value), "row" : row_value}
+        return {"column" : a1_to_int(column_value), "row" : int(row_value)}

@@ -68,6 +68,12 @@ def column_row_to_a1(column : int, row : int, inverse : bool = False) -> str:
             f"Current received type of 'column': {type(column)}.\n"
             f"Current received type of 'row': {type(row)}."
         )
+    elif (DEFAULT_STARTING_INDEX > column or DEFAULT_STARTING_INDEX > row):
+        raise ValueError(
+            f"The value of argument 'column' and 'row' of function 'column_row_to_a1()' cannot be less than {DEFAULT_STARTING_INDEX}.\n"
+            f"Current received value of 'column': {column}.\n"
+            f"Current received value of 'row': {row}.\n"
+        )
     else:
         return f"{int_to_a1(column)}{row}" if not inverse else f"{int_to_a1(row)}{column}"
 

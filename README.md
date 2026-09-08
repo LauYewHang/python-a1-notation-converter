@@ -16,6 +16,8 @@ int_to_a1(52, 0) # return "A[" (should be "BA")
 - Added 'starting_index' argument for function a1_to_int() to allow specification of value of "A".
 ### Version 1.1.2
 - Fixed an error where function a1_to_column_row()'s return value having the wrong data type. I.e. for the dictionary being returned, the value of key "row" is a string instead of integer.
+### Version 1.1.3
+- Added value check for argument 'column' and 'row' of function 'column_row_to_a1()'. The argument value cannot be less than 1.
 ***
 
 ## Installation

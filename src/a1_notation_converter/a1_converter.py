@@ -1,10 +1,23 @@
-from typing import TypedDict
+from typing import overload, TypedDict
 import re
 
 ASCII_A_INDEX = 65
 ASCII_Z_INDEX = 90
 ALPHABET_AMOUNT = 26
 DEFAULT_STARTING_INDEX = 1
+
+class A1Notation:
+    @overload
+    def __int__(self, column : int, row : int):
+        pass
+    def __init__(self, a1_notation : str):
+        if (re.compile("[a-zA-Z]+[0-9]+").match(a1_notation) == None):
+            raise ValueError(
+                f"The given value of argument 'a1_notation' of class A1Notation does not match the regular expression '[a-zA-Z]+[0-9]+$'."
+                f"Current received value of 'a1_notation': {a1_notation}."
+            )
+        else:
+            self.a1_notation = a1_notation
 
 def int_to_a1(number : int, starting_index : int = DEFAULT_STARTING_INDEX) -> str:
     if (not type(number) is int):

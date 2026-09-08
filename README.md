@@ -1,51 +1,114 @@
-# A1 notation converter
-The A1 notation converter library allows the user to convert integer to its A1 notation form and vice versa. In this context, the [A1 notation](https://developers.google.com/workspace/sheets/api/guides/concepts#a1-notation) refer to the syntax used in spreadsheet program such as Google Sheets and Microsoft Excel to represent the index of column within the spreadhseet.  
-E.g. 'G' represents 7th column, 'AZ' represents 52th column.
-***
+# Documentation
 
-## Latest releases
-### Version 1.1.0
-- Fixed logic error when converting int to a1 notation using int_to_a1() with starting_index = 0 results in wrong answer being returned. I.e.  
-```
-int_to_a1(26, 0) # return "[" (should be "AA")
-int_to_a1(52, 0) # return "A[" (should be "BA")
-```
-- Added function column_row_to_a1() to convert provided column and row into a1 notation.
-- Added function a1_to_column_row() to convert provided a1 notation into dictionary that contains column and row keys.
-### Version 1.1.1
-- Added 'starting_index' argument for function a1_to_int() to allow specification of value of "A".
-### Version 1.1.2
-- Fixed an error where function a1_to_column_row()'s return value having the wrong data type. I.e. for the dictionary being returned, the value of key "row" is a string instead of integer.
-### Version 1.1.3
-- Added value check for argument 'column' and 'row' of function 'column_row_to_a1()'. The argument value cannot be less than 1.
-***
+## Available functions
+[int_to_a1(number, starting_index = 1)](#int_to_a1(number,-starting_index-=-1))  
+Convert the given number to its A1 notation.  
 
-## Installation
-Installation of this library can be done with Python `pip`:  
-`pip install a1-notation-converter`  
-The package and release history can be found at [pypi.org](https://pypi.org/project/a1-notation-converter/).
-***
+[a1_to_int(a1_notation, starting_index = 1)](a1_to_int(a1_notation,-starting_index-=-1))  
+Convert the given A1 notation to its integer representation.
 
-## Example
-Importing the library:
-```python
-from a1_notation_converter import a1_converter
-```
+[column_row_to_a1(column, row, inverse = False)](#column_row_to_a1(column,-row,-inverse-=-false))  
+Convert the given column and row integer to an A1 notation.
 
-Converting integer to A1 notation:
-```python
-a1_converter.int_to_a1(1)       # return "A"
-a1_converter.int_to_a1(27)      # return "AA"
-a1_converter.int_to_a1(731)     # return "ABC"
-```
+[a1_to_column_row(a1_notation)](#a1_to_column_row(a1_notation))  
+Convert the given A1 notation to a dictionary with column and row keys.
 
-Converting A1 notation to integer:
-```python
-a1_converter.a1_to_int("A")      # return 1
-a1_converter.a1_to_int("AA")     # return 27
-a1_converter.a1_to_int("CBA")    # return 2081
-```
-***
+## Functions details
+### int_to_a1(number, starting_index = 1)  
+Convert the given number to its A1 notation.  
+- Arguments:
+    - number: An integer, the number to be converted to A1 notation. The value of argument `number` cannot be less than the value of argument `starting_index`, else a ValueError would be raised.
+    - starting_index: An integer, the value that represents the A1 notation "A", default to 1. I.e.  
+        When starting_index = 0:
+        ```
+        0  = 'A'
+        1  = 'B'
+        25 = 'Z'
+        26 = 'AA'
+        ```
+        When starting_index = 1:
+        ```
+        1  = 'A'
+        2  = 'B'
+        26 = 'Z'
+        27 = 'AA'
+        ```
+        When satrting_index = -1:
+        ```
+        -1 = 'A'
+         0 = 'B'
+        24 = 'Z'
+        25 = 'AA'
+        ```
+- Return:  
+A string that represents the A1 notation of the given nunber.
+- Example
+    ```python
+    int_to_a1(1)        # returns "A"
+    int_to_a1(26)       # returns "Z"
+    int_to_a1(27)       # returns "AA"
 
-## Documentation
-Documentation can be found at this [GitHub repository](https://github.com/LauYewHang/python-a1-notation-converter/tree/master/docs).
+    int_to_a1(1, 0)     # returns "B"
+    int_to_a1(26, 0)    # returns "AA"
+
+    int_to_a1(1, -1)    # returns "C"
+    int_to_a1(26, -1)   # returns "AB"
+
+    int_to_a1(0)        # raise ValueError, number is less than starting_index (default 1)
+    ```
+
+### a1_to_int(a1_notation, starting_index = 1)
+Convert the given A1 notation to its integer representation.
+- Arguments:
+    - a1_notation: A string, the A1 notation to be converted into an integer.
+    - starting_index: An integer, the value that represents the A1 notation "A", default to 1.
+- Return:  
+An integer that represents the given A1 notation.
+- Example:  
+    ```python
+    a1_to_int("A")      # returns 1
+    a1_to_int("AA")     # returns 27
+
+    a1_to_int("A", 0)   # returns 0
+    a1_to_int("AA", 0)  # returns 26
+
+    a1_to_int("A", -1)  # returns -1
+    a1_to_int("AA", -1) # returns 25
+    ```
+### column_row_to_a1(column, row, inverse = false)
+Convert the given column and row integer to an A1 notation. The value that represents A1 notation "A" is 1.
+- Arguments:
+    - column: An integer, represents the column's index.
+    - row: An integer, represents the row's index.
+    - inverse: A boolean, represents if the column and row are inverse.
+- Return:  
+A string that represents the A1 notation of the given column and row.
+- Example:  
+    ```python
+    column_row_to_a1(1, 1)      # return "A1"
+    column_row_to_a1(3, 26)     # return "C26"
+    column_row_to_a1(53, 32)    # return "BA32"
+    
+    column_row_to_a1(3, 26, inverse = True)     # return "Z3"
+    column_row_to_a1(32, 53, inverse = True)    # return "AF53"
+
+    column_row_to_a1(0, 1)      # raise ValueError, value of column cannot be less than 1
+    column_row_to_a1(1, 0)      # raise ValueError, value of row cannot be less than 1
+    ```
+
+### a1_to_column_row(a1_notation)
+Convert the given A1 notation to a dictionary with column and row keys. The value that represents A1 notation "A" is 1.
+- Arguments:
+    - a1_notation: A string, the A1 notation to be converted.
+- Return:  
+A dictionary with keys ["column", "row"].
+- Example:  
+    ```python
+    ans1 = a1_to_column_row("A3")   # return {"column" : 1, "row" : 3}
+    ans1["column"]                  # return 1
+    ans1["row"]                     # return 3
+
+    ans2 = a1_to_column_row("AZ23") # return {"column" : 52, "row" : 23}
+    ans2["column"]                  # return 52
+    ans2["row"]                     # return 23
+    ```

@@ -4,13 +4,13 @@
 [int_to_a1(number, starting_index = 1)](#int_to_a1(number,-starting_index-=-1))  
 Convert the given number to its A1 notation.  
 
-[a1_to_int(a1_notation, starting_index = 1)]()  
+[a1_to_int(a1_notation, starting_index = 1)](a1_to_int(a1_notation,-starting_index-=-1))  
 Convert the given A1 notation to its integer representation.
 
-[column_row_to_a1(column, row, inverse = False)]()  
+[column_row_to_a1(column, row, inverse = False)](#column_row_to_a1(column,-row,-inverse-=-false))  
 Convert the given column and row integer to an A1 notation.
 
-[a1_to_column_row(a1_notation)]()  
+[a1_to_column_row(a1_notation)](#a1_to_column_row(a1_notation))  
 Convert the given A1 notation to a dictionary with column and row keys.
 
 ## Functions details

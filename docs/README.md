@@ -1,13 +1,13 @@
 # Documentation
 
 ## Available functions
-[int_to_a1(number, starting_index = 1)](#int_to_a1(number,-starting_index-=-1))  
+[int_to_a1(number, starting_index = 1)](#int_to_a1number-starting_index--1)  
 Convert the given number to its A1 notation.  
 
-[a1_to_int(a1_notation, starting_index = 1)](a1_to_int(a1_notation,-starting_index-=-1))  
+[a1_to_int(a1_notation, starting_index = 1)](#a1_to_inta1_notation-starting_index--1)  
 Convert the given A1 notation to its integer representation.
 
-[column_row_to_a1(column, row, inverse = False)](#column_row_to_a1(column,-row,-inverse-=-false))  
+[column_row_to_a1(column, row, inverse = False)](#a1_to_column_rowa1_notation)  
 Convert the given column and row integer to an A1 notation.
 
 [a1_to_column_row(a1_notation)](#a1_to_column_row(a1_notation))  
@@ -56,6 +56,7 @@ A string that represents the A1 notation of the given nunber.
 
     int_to_a1(0)        # raise ValueError, number is less than starting_index (default 1)
     ```
+***
 
 ### a1_to_int(a1_notation, starting_index = 1)
 Convert the given A1 notation to its integer representation.
@@ -75,6 +76,7 @@ An integer that represents the given A1 notation.
     a1_to_int("A", -1)  # returns -1
     a1_to_int("AA", -1) # returns 25
     ```
+***
 ### column_row_to_a1(column, row, inverse = false)
 Convert the given column and row integer to an A1 notation. The value that represents A1 notation "A" is 1.
 - Arguments:
@@ -95,7 +97,7 @@ A string that represents the A1 notation of the given column and row.
     column_row_to_a1(0, 1)      # raise ValueError, value of column cannot be less than 1
     column_row_to_a1(1, 0)      # raise ValueError, value of row cannot be less than 1
     ```
-
+***
 ### a1_to_column_row(a1_notation)
 Convert the given A1 notation to a dictionary with column and row keys. The value that represents A1 notation "A" is 1.
 - Arguments:

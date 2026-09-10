@@ -79,3 +79,27 @@ index_1_real_value = ALPHABET_AMOUNT ** 1 * 2 = 52
 
 real_value = 52 + 3 = 55
 ```
+A1 notation has a pseudo base-26 type of numeral system, as it does not have a character that represents value "0".  
+I.e. supposedly in a base-26 system, the character "Z" can be used to represent value "0", character "A" can be used to represent value "1". Then the character "Y" would represent value "25", while value "26" can be represented by "AZ", value "27" can be represented by "AA", and so on.  
+However, since there is no character that represents value "0" in A1 notation, character "Z" would represent value "26", "AA" would represent value "27", "AB" would represent value "28", and so on. Therefore, we know that for each character at a certain index, the least amount of value that it can represent is "1" ("A"), and the highest amount of value that it can represent is "26" ("Z"). Then, the real value that the character represents is calculated by `(ALPHABET_AMOUNT ** index * character_value)`.  
+Thus, for each character beyond the index 0, the real value that it represents must be divisible by 26. We can start by taking the input `number`, and modulo it by 26: `remainder = number % ALPHABET_AMOUNT`. If the remainder is not 0, then the returned value is the real value represented by character at index 0; if the remainder is 0, then we know the character at index 0 is "Z" (since 0 does not exist, the only way that `number` is divisible by 26 is having the character at index 0 represents the real value 26, as all the real value represented by character at subsequent index is divisible by 26 by its nature).  
+Then, we deduct the `remainder` from the `number`, and divide it by 26: `(number - remainder) // ALPHABET_AMOUNT`. The value returned by this equation tells us how many "26" can be divided from `number`, in other word, it tells us what is the value of character in the subsequent index. E.g.  
+```
+number = 55 = "BC"
+
+remainder = 55 % 26 = 3     # the character value at index 0, "C"
+
+(55 - 3) // 26 = 2          # the character value at index 1, "B"
+```
+In the case that `(number - remainder) // ALPHABET_AMOUNT` > 26, then we know that the character at subsequent index cannot fully represent the real value, and it requires an additional index. Thus, we recursively call the function to find the combination of character in each index that can represent the total real value. E.g.  
+```
+number = 703 = "AAA"
+
+remainder1 = 703 % 26 = 1   # the character value at index 0, "A"
+
+(703 - 1) // 26 = 27        # no character can represent value 27
+
+remainder2 = 27 % 26 = 1    # the character value at index 1, "A"
+
+(27 - 1) // 26 = 1          # the character value at index 2, "A"
+```

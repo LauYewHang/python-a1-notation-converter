@@ -25,6 +25,11 @@ def int_to_a1(number : int, starting_index : int = DEFAULT_STARTING_INDEX) -> st
             f"The type of argument 'number' of function 'int_to_a1()' needs to be type 'int'.\n"
             f"Current received type of 'number': {type(number)}."
         )
+    elif (not type(starting_index) is int):
+        raise TypeError(
+            f"The type of argument 'starting_index' of function 'int_to_a1()' needs to be type 'int'.\n"
+            f"Current received type of 'starting_index': {type(starting_index)}"
+        )
     elif (number < starting_index):
         raise ValueError(
             "The given value of argument 'number' of function 'int_to_a1()' cannot be less than argument 'starting_index'.\n"
@@ -39,11 +44,16 @@ def int_to_a1(number : int, starting_index : int = DEFAULT_STARTING_INDEX) -> st
             remainder = ALPHABET_AMOUNT if number % ALPHABET_AMOUNT == 0 else number % ALPHABET_AMOUNT
             return int_to_a1((number - remainder) // ALPHABET_AMOUNT) + int_to_a1(remainder)
 
-def a1_to_int(a1_notation : str) -> int:
+def a1_to_int(a1_notation : str, starting_index : int = DEFAULT_STARTING_INDEX) -> int:
     if (not type(a1_notation) is str):
         raise TypeError(
             f"The type of argument 'a1_notation' of function 'a1_to_int()' needs to be type 'str'.\n"
             f"Current received type of 'a1_notation': {type(a1_notation)}."
+        )
+    elif (not type(starting_index) is int):
+        raise TypeError(
+            f"The type of argument 'starting_index' of function 'a1_to_int()' needs to be type 'int'.\n"
+            f"Current received type of 'starting_index': {type(starting_index)}"
         )
     else:
         number = 0
@@ -62,14 +72,20 @@ def a1_to_int(a1_notation : str) -> int:
             else:
                 number += (ord(a1_notation[character_index]) - ASCII_A_INDEX + 1) * ALPHABET_AMOUNT**(a1_notation_len - character_index - 1)
 
-        return number
+        return number - (DEFAULT_STARTING_INDEX - starting_index)
 
 def column_row_to_a1(column : int, row : int, inverse : bool = False) -> str:
     if (not type(column) is int or not type(row) is int):
         raise TypeError(
-            f"The type of argument 'column' and 'row' of function column_row_to_a1() needs to be type 'int'.\n"
+            f"The type of argument 'column' and 'row' of function 'column_row_to_a1()' needs to be type 'int'.\n"
             f"Current received type of 'column': {type(column)}.\n"
             f"Current received type of 'row': {type(row)}."
+        )
+    elif (DEFAULT_STARTING_INDEX > column or DEFAULT_STARTING_INDEX > row):
+        raise ValueError(
+            f"The value of argument 'column' and 'row' of function 'column_row_to_a1()' cannot be less than {DEFAULT_STARTING_INDEX}.\n"
+            f"Current received value of 'column': {column}.\n"
+            f"Current received value of 'row': {row}.\n"
         )
     else:
         return f"{int_to_a1(column)}{row}" if not inverse else f"{int_to_a1(row)}{column}"
@@ -83,10 +99,10 @@ def a1_to_column_row(a1_notation : str) -> ColumnRowDict:
         )
     elif (re.compile("[a-zA-Z]+[0-9]+$").match(a1_notation) == None):
         raise ValueError(
-            f"The given value of argument 'a1_notation' of function a1_to_column_row() does not match the regular expression '[a-zA-Z]+[0-9]+$'."
+            f"The given value of argument 'a1_notation' of function 'a1_to_column_row()' does not match the regular expression '[a-zA-Z]+[0-9]+$'."
             f"Current received value of 'a1_notation': {a1_notation}."
         )
     else:
         column_value = re.compile("[a-zA-Z]+").search(a1_notation).group(0)
         row_value = re.compile("[0-9]+").search(a1_notation).group(0)
-        return {"column" : a1_to_int(column_value), "row" : row_value}
+        return {"column" : a1_to_int(column_value), "row" : int(row_value)}

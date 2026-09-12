@@ -1,4 +1,4 @@
-from typing import TypedDict, overload
+from typing import TypedDict
 import re
 
 ASCII_A_INDEX = 65

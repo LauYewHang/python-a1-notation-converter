@@ -5,7 +5,9 @@ ASCII_A_INDEX = 65
 ASCII_Z_INDEX = 90
 ALPHABET_AMOUNT = 26
 DEFAULT_STARTING_INDEX = 1
+A1_REGULAR_EXPRESSION = "[a-zA-Z]+[1-9][0-9]*$"
 
+# general functions
 def int_to_a1(number : int, starting_index : int = DEFAULT_STARTING_INDEX) -> str:
     if (not type(number) is int):
         raise TypeError(
@@ -61,7 +63,7 @@ def a1_to_int(a1_notation : str, starting_index : int = DEFAULT_STARTING_INDEX) 
 
         return number - (DEFAULT_STARTING_INDEX - starting_index)
 
-def column_row_to_a1(column : int, row : int, inverse : bool = False) -> str:
+def column_row_to_a1(column : int, row : int) -> str:
     if (not type(column) is int or not type(row) is int):
         raise TypeError(
             f"The type of argument 'column' and 'row' of function 'column_row_to_a1()' needs to be type 'int'.\n"
@@ -75,7 +77,7 @@ def column_row_to_a1(column : int, row : int, inverse : bool = False) -> str:
             f"Current received value of 'row': {row}.\n"
         )
     else:
-        return f"{int_to_a1(column)}{row}" if not inverse else f"{int_to_a1(row)}{column}"
+        return f"{int_to_a1(column)}{row}"
 
 ColumnRowDict = TypedDict("ColumnRowDict", {"column" : int, "row" : int})
 def a1_to_column_row(a1_notation : str) -> ColumnRowDict:
@@ -84,12 +86,12 @@ def a1_to_column_row(a1_notation : str) -> ColumnRowDict:
             f"The type of argument 'a1_notation' of function 'a1_to_column_row()' needs to be type 'str'.\n"
             f"Current received type of 'a1_notation': {type(a1_notation)}."
         )
-    elif (re.compile("[a-zA-Z]+[0-9]+$").match(a1_notation) == None):
+    elif (re.compile(A1_REGULAR_EXPRESSION).match(a1_notation) == None):
         raise ValueError(
-            f"The given value of argument 'a1_notation' of function 'a1_to_column_row()' does not match the regular expression '[a-zA-Z]+[0-9]+$'."
+            f"The given value of argument 'a1_notation' of function 'a1_to_column_row()' does not match the regular expression {A1_REGULAR_EXPRESSION}."
             f"Current received value of 'a1_notation': {a1_notation}."
         )
     else:
         column_value = re.compile("[a-zA-Z]+").search(a1_notation).group(0)
-        row_value = re.compile("[0-9]+").search(a1_notation).group(0)
+        row_value = re.compile("[1-9][0-9]*$").search(a1_notation).group(0)
         return {"column" : a1_to_int(column_value), "row" : int(row_value)}

@@ -4,20 +4,40 @@ E.g. 'G' represents 7th column, 'AZ' represents 52th column.
 ***
 
 ## Latest releases
-### Version 1.1.0
-- Fixed logic error when converting int to a1 notation using int_to_a1() with starting_index = 0 results in wrong answer being returned. I.e.  
+### Version 1.2.0
+- Added class `A1Notation`.
+```python
+from a1_notation_converter.A1Notation import *
+
+# default object instantiation
+n1 = A1Notation("A12")
+print(n1.a1_notation)       # print "A12"
+print(n1.column)            # print 1
+print(n1.row)               # print 12
+
+n1.column = 3               # set the column value to 3 and changed the a1_notation value
+print(n1.a1_notation)       # print "C12"
+
+# object instantiation with column and row
+n2 = A1Notation.from_column_row(column = 3, row = 23)
+print(n2.a1_notation)       # print "C23"
+
+# A1Notation arithmetic
+n3 = A1Notation("B11")
+n4 = A1Notation("D2")
+
+n5 = n3 + n4                # add the A1Notation objects' column and row together
+print(n5.a1_notation)       # print "F13"
+
+n6 = n3 + [4, 5]            # add 4 with n3.column, and add 5 with n3.row
+print(n6.a1_notation)       # print "F16"
+
+n7 = n3 + (4, 5)            # add 4 with n3.column, and add 5 with n3.row
+print(n7.a1_notation)       # print "F16"
+
+n8 = n3 + {"column" : 4, "row" : 5}     # add dictionary's 'column' and 'row' value with A1Notation object's column and row
+print(n8.a1_notation)       # print "F16"
 ```
-int_to_a1(26, 0) # return "[" (should be "AA")
-int_to_a1(52, 0) # return "A[" (should be "BA")
-```
-- Added function column_row_to_a1() to convert provided column and row into a1 notation.
-- Added function a1_to_column_row() to convert provided a1 notation into dictionary that contains column and row keys.
-### Version 1.1.1
-- Added 'starting_index' argument for function a1_to_int() to allow specification of value of "A".
-### Version 1.1.2
-- Fixed an error where function a1_to_column_row()'s return value having the wrong data type. I.e. for the dictionary being returned, the value of key "row" is a string instead of integer.
-### Version 1.1.3
-- Added value check for argument 'column' and 'row' of function 'column_row_to_a1()'. The argument value cannot be less than 1.
 ***
 
 ## Installation
